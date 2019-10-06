@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import springfox.documentation.annotations.ApiIgnore;
+
 @Entity
 @Table(name="TB_EVENT")
 public class Event implements Serializable {
