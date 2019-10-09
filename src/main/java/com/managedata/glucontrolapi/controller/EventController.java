@@ -51,13 +51,6 @@ public class EventController {
 	@ApiOperation(value="Return all events for an user")
 	public List<Event> findByUser(@RequestBody User user){
 		User newUser = userService.findById(user.getId());
-		return eventService.findByUser(newUser);
-	}
-	
-	@PostMapping("/event/glucose/user")
-	@ApiOperation(value="Return all events for an user")
-	public List<Event> listGlucoseByUserId(@RequestBody User user){
-		User newUser = userService.findById(user.getId());
 		List<Event> newListEvent = eventService.findByUser(newUser);
 		newListEvent.forEach(event -> event.setUser(null));
 		//Sort
