@@ -40,6 +40,9 @@ public class Event implements Serializable {
 	@Column(name="value")
 	BigDecimal value;
 	
+	@Column(name="varPerMin")
+	BigDecimal varPerMin;
+	
 	@Column(name="description")
 	String description;
 
@@ -81,6 +84,14 @@ public class Event implements Serializable {
 
 	public void setValue(BigDecimal value) {
 		this.value = value;
+	}
+
+	public BigDecimal getVarPerMin() {
+		return varPerMin;
+	}
+
+	public void setVarPerMin(BigDecimal varPerMin) {
+		this.varPerMin = varPerMin;
 	}
 
 	public String getDescription() {
