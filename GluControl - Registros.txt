@@ -1,0 +1,250 @@
+{
+  "drEmail": "dr@email.com",
+  "drFullName": "Dr. Full Name",
+  "email": "pedro@pedroazzam.me",
+  "firstName": "Pedro",
+  "lastName": "Azzam",
+  "password": "12345"
+}
+
+{
+  "date": "2019-10-09T10:11",
+  "description": "Fase de teste",
+  "type": "Glucose",
+  "user": {
+    "id": 1
+  },
+  "value": 124,
+  "varPerMin": 0
+}
+
+{
+  "date": "2019-10-09T11:56",
+  "description": "Fase de teste",
+  "type": "Glucose",
+  "user": {
+    "id": 1
+  },
+  "value": 109,
+  "varPerMin": 0
+}
+
+{
+  "date": "2019-10-09T16:03",
+  "description": "Fase de teste",
+  "type": "Glucose",
+  "user": {
+    "id": 1
+  },
+  "value": 198,
+  "varPerMin": 0
+}
+
+{
+  "date": "2019-10-09T17:53",
+  "description": "Fase de teste",
+  "type": "Glucose",
+  "user": {
+    "id": 1
+  },
+  "value": 378,
+  "varPerMin": 0
+}
+
+{
+  "date": "2019-10-09T20:22:00",
+  "description": "Fase de teste",
+  "type": "Glucose",
+  "user": {
+    "id": 1
+  },
+  "value": 396,
+  "varPerMin": 0
+}
+
+{
+  "date": "2019-10-09T20:22",
+  "description": "Fase de teste",
+  "type": "Insulin Lispro",
+  "user": {
+    "id": 1
+  },
+  "value": 2,
+  "varPerMin": 0
+}
+
+{
+  "date": "2019-10-09T23:49",
+  "description": "Fase de teste",
+  "type": "Glucose",
+  "user": {
+    "id": 1
+  },
+  "value": 244,
+  "varPerMin": 0
+}
+
+{
+  "date": "2019-10-09T23:49",
+  "description": "Fase de teste",
+  "type": "Insulin Lispro",
+  "user": {
+    "id": 1
+  },
+  "value": 1,
+  "varPerMin": 0
+}
+
+{
+  "date": "2019-10-10T05:23",
+  "description": "Fase de teste",
+  "type": "Glucose",
+  "user": {
+    "id": 1
+  },
+  "value": 218,
+  "varPerMin": 0
+}
+
+{
+  "date": "2019-10-10T05:23",
+  "description": "Fase de teste",
+  "type": "Insulin Lispro",
+  "user": {
+    "id": 1
+  },
+  "value": 1,
+  "varPerMin": 0
+}
+
+{
+  "date": "2019-10-10T07:24",
+  "description": "Fase de teste",
+  "type": "Glucose",
+  "user": {
+    "id": 1
+  },
+  "value": 182,
+  "varPerMin": 0
+}
+
+{
+  "date": "2019-10-10T07:24",
+  "description": "Fase de teste",
+  "type": "Insulin Toujeo",
+  "user": {
+    "id": 1
+  },
+  "value": 25,
+  "varPerMin": 0
+}
+
+{
+  "date": "2019-10-10T10:02",
+  "description": "Fase de teste",
+  "type": "Glucose",
+  "user": {
+    "id": 1
+  },
+  "value": 89,
+  "varPerMin": 0
+}
+
+{
+  "date": "2019-10-10T10:30",
+  "description": "Fase de teste",
+  "type": "Glucose",
+  "user": {
+    "id": 1
+  },
+  "value": 107,
+  "varPerMin": 0
+}
+
+{
+  "date": "2019-10-10T11:45",
+  "description": "Fase de teste",
+  "type": "Glucose",
+  "user": {
+    "id": 1
+  },
+  "value": 399,
+  "varPerMin": 0
+}
+
+{
+  "date": "2019-10-10T14:08",
+  "description": "Fase de teste",
+  "type": "Glucose",
+  "user": {
+    "id": 1
+  },
+  "value": 448,
+  "varPerMin": 0
+}
+
+{
+  "date": "2019-10-10T14:08",
+  "description": "Fase de teste",
+  "type": "Insulin Lispro",
+  "user": {
+    "id": 1
+  },
+  "value": 3,
+  "varPerMin": 0
+}
+
+{
+  "date": "2019-10-10T18:08",
+  "description": "Fase de teste",
+  "type": "Glucose",
+  "user": {
+    "id": 1
+  },
+  "value": 247,
+  "varPerMin": 0
+}
+
+{
+  "date": "2019-10-11T00:08",
+  "description": "Fase de teste",
+  "type": "Glucose",
+  "user": {
+    "id": 1
+  },
+  "value": 196,
+  "varPerMin": 0
+}
+
+{
+  "date": "2019-10-11T06:22",
+  "description": "Fase de teste",
+  "type": "Glucose",
+  "user": {
+    "id": 1
+  },
+  "value": 256,
+  "varPerMin": 0
+}
+
+{
+  "date": "2019-10-11T06:22",
+  "description": "Fase de teste",
+  "type": "Insulin Lispro",
+  "user": {
+    "id": 1
+  },
+  "value": 2,
+  "varPerMin": 0
+}
+
+{
+  "date": "2019-10-11T08:20",
+  "description": "Fase de teste",
+  "type": "Insulin Toujeo",
+  "user": {
+    "id": 1
+  },
+  "value": 25,
+  "varPerMin": 0
+}

@@ -7,6 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class GlucontrolapiApplication {
 
 	public static void main(String[] args) {
+		//instanceof Object;
+		
 		SpringApplication.run(GlucontrolapiApplication.class, args);
 	}
 

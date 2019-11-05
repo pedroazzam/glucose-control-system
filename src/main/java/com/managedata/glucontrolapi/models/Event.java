@@ -2,6 +2,8 @@ package com.managedata.glucontrolapi.models;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -12,8 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import springfox.documentation.annotations.ApiIgnore;
 
 @Entity
 @Table(name="TB_EVENT")
@@ -28,7 +28,8 @@ public class Event implements Serializable {
 	long id;
 	
 	@Column(name="date")
-	Date date;
+	LocalDateTime date;
+	//Date date;
 	
 	@ManyToOne
 	@JoinColumn(name="user_id")
@@ -54,11 +55,15 @@ public class Event implements Serializable {
 		this.id = id;
 	}
 
-	public Date getDate() {
+	public LocalDateTime getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(LocalDateTime date) {
+		//System.out.println("TIMEZONE!!!");
+		//System.out.println(date.getTimezoneOffset());
+		//System.out.println(new Date().getTimezoneOffset());
+		//System.out.println(new Date());
 		this.date = date;
 	}
 
