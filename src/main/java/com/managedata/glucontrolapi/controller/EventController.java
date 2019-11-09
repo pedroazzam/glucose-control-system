@@ -1,6 +1,7 @@
 package com.managedata.glucontrolapi.controller;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -8,14 +9,17 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.managedata.glucontrolapi.models.Event;
@@ -49,7 +53,7 @@ public class EventController {
 	}
 	
 	@PostMapping("/event/user")
-	@ApiOperation(value="Return all events for an user")
+	@ApiOperation(value="Return all events for an user (through a POST method)")
 	public List<Event> findByUser(@RequestBody User user){
 		User newUser = userService.findById(user.getId());
 		List<Event> newListEvent = eventService.findByUser(newUser);
@@ -57,6 +61,35 @@ public class EventController {
 		//Sort By DateTime
 		newListEvent.sort(Comparator.comparing(Event::getDate));
 		return newListEvent;
+	}
+	
+	@GetMapping("event/user/{id}")
+	@ApiOperation(value="Return all events for an user (through a GET method)")
+	public List<Event> findByUserId(@PathVariable(value="id") long id) {
+		User newUser = userService.findById(id);
+		List<Event> newListEvent = eventService.findByUser(newUser);
+		newListEvent.forEach(event -> event.setUser(null));
+		//Sort By DateTime
+		newListEvent.sort(Comparator.comparing(Event::getDate));
+		return newListEvent;
+	}
+	
+	@GetMapping("event/userdates")
+	@ApiOperation(value="Return all events for an user between two dates (through a GET method)")
+	public List<Event> findByUserIdDateFromTo(@RequestParam long id, @RequestParam String dateTimeFrom, @RequestParam String dateTimeTo){
+		LocalDateTime newDateTimeFrom = LocalDateTime.parse(dateTimeFrom);
+		LocalDateTime newDateTimeTo = LocalDateTime.parse(dateTimeTo);
+		User newUser = userService.findById(id);
+		List<Event> eventList = eventService.findByUser(newUser);
+		List<Event> newEventList = new ArrayList<Event>();
+		
+		eventList.forEach(event -> {
+			if ((event.getDate().isAfter(newDateTimeFrom) || event.getDate().isEqual(newDateTimeFrom)) && (event.getDate().isBefore(newDateTimeTo) || event.getDate().isEqual(newDateTimeTo))) {
+				newEventList.add(event);
+			}
+		});
+		
+		return newEventList;
 	}
 	
 	@PostMapping("event/add")

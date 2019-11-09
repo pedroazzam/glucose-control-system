@@ -1,6 +1,5 @@
 package com.managedata.glucontrolapi.controller;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +44,21 @@ public class UserController {
 	public User saveUser (@RequestBody User user) {
 		User newUser = userService.save(user);
 		return newUser;
+	}
+	
+	@PostMapping("/login")
+	@ApiOperation(value="Login")
+	public User saveUser (@RequestBody String email, @RequestBody String password) {
+		User newUser = userService.findByEmailAndPassword(email, password);
+		if (newUser != null) {
+			System.out.println("é diferente de null!");
+			return newUser;
+		}else {
+			System.out.println("é null!");
+			throw new IllegalArgumentException("Access denied! Please try again or SignUp.");
+		}
+			
+		
 	}
 
 }
