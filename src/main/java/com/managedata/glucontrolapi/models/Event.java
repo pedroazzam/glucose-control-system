@@ -2,9 +2,7 @@ package com.managedata.glucontrolapi.models;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -41,8 +39,11 @@ public class Event implements Serializable {
 	@Column(name="value")
 	BigDecimal value;
 	
-	@Column(name="varPerMin")
-	BigDecimal varPerMin;
+	@Column(name="var_per_min_p2p")//Variation per minute from the straight before event
+	BigDecimal varPerMinP2P;
+	
+	@Column(name="var_per_min_t2p")//Variation per minute from the scheduled event
+	BigDecimal varPerMinT2P;
 	
 	@Column(name="description")
 	String description;
@@ -91,12 +92,20 @@ public class Event implements Serializable {
 		this.value = value;
 	}
 
-	public BigDecimal getVarPerMin() {
-		return varPerMin;
+	public BigDecimal getVarPerMinP2P() {
+		return varPerMinP2P;
 	}
 
-	public void setVarPerMin(BigDecimal varPerMin) {
-		this.varPerMin = varPerMin;
+	public void setVarPerMinP2P(BigDecimal varPerMinP2P) {
+		this.varPerMinP2P = varPerMinP2P;
+	}
+	
+	public BigDecimal getVarPerMinT2P() {
+		return varPerMinT2P;
+	}
+
+	public void setVarPerMinT2P(BigDecimal varPerMinT2P) {
+		this.varPerMinT2P = varPerMinT2P;
 	}
 
 	public String getDescription() {

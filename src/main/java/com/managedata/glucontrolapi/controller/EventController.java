@@ -1,16 +1,13 @@
 package com.managedata.glucontrolapi.controller;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.concurrent.atomic.AtomicReference;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -23,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.managedata.glucontrolapi.models.Event;
+import com.managedata.glucontrolapi.models.GlucosePrediction;
 import com.managedata.glucontrolapi.models.User;
 import com.managedata.glucontrolapi.service.EventService;
 import com.managedata.glucontrolapi.service.UserService;
@@ -75,7 +73,7 @@ public class EventController {
 	}
 	
 	@GetMapping("event/userdates")
-	@ApiOperation(value="Return all events for an user between two dates (through a GET method)")
+	@ApiOperation(value="Return all events for an user between two dates (through a GET method) plus variations calculation")
 	public List<Event> findByUserIdDateFromTo(@RequestParam long id, @RequestParam String dateTimeFrom, @RequestParam String dateTimeTo){
 		LocalDateTime newDateTimeFrom = LocalDateTime.parse(dateTimeFrom);
 		LocalDateTime newDateTimeTo = LocalDateTime.parse(dateTimeTo);
@@ -83,12 +81,26 @@ public class EventController {
 		List<Event> eventList = eventService.findByUser(newUser);
 		List<Event> newEventList = new ArrayList<Event>();
 		
+		AtomicReference<Event> firstEvent = new AtomicReference<Event>();
+		AtomicReference<Event> lastEvent = new AtomicReference<Event>();
+		
+		// CHECK THE ORDER OF EVENTS! MASS WITH THE TIME!
+		// PRECISO ACERTAR A DINAMICA DOS DADOS CLACULADOS. ESTAMOS CALCULANDO O P2P E O T2P, MAS FALTA AJUSTAR O T2P PARA SER UM CALCULO QUE VAI ACUMULANDO A CADA PONTO!!!
+		
 		eventList.forEach(event -> {
 			if ((event.getDate().isAfter(newDateTimeFrom) || event.getDate().isEqual(newDateTimeFrom)) && (event.getDate().isBefore(newDateTimeTo) || event.getDate().isEqual(newDateTimeTo))) {
+				if(firstEvent.get() == null) {
+					firstEvent.set(event);
+				}
+				lastEvent.set(event);
 				newEventList.add(event);
 			}
 		});
 		
+		System.out.println("First Event Id: " + firstEvent.get().getId());
+		System.out.println("Last Event Id: " + lastEvent.get().getId());
+		
+		calculateVarPerMinT2P(firstEvent.get(), lastEvent.get());
 		return newEventList;
 	}
 	
@@ -105,12 +117,12 @@ public class EventController {
 		List<Event> listEvent = eventService.findByUser(user);
 		//Sort By DateTime
 		listEvent.sort(Comparator.comparing(Event::getDate));
-		calculateVarPerMin(listEvent);
+		calculateVarPerMinP2P(listEvent);
 		// Na hora do retorno eu busco novamente para pegar com a métrica da variação já calculada!
 		return eventService.findById(newEvent.getId());
 	}
 	
-	public void calculateVarPerMin(List<Event> list) {
+	public void calculateVarPerMinP2P(List<Event> list) {
 		List<Event> newList = new ArrayList<Event>();
 		list.forEach(event -> {
 			if (event.getType().equalsIgnoreCase("Glucose")) {
@@ -135,10 +147,37 @@ public class EventController {
 				//difMin = BigDecimal.valueOf((newList.get(ind).getDate()./60000) - (newList.get(ind - 1).getDate().getTime()/60000));//DELETE ME!
 				difGluc = newList.get(ind).getValue().subtract(newList.get(ind-1).getValue());
 				varPerMin = difGluc.divide(difMin,4,BigDecimal.ROUND_HALF_UP);
-				event.setVarPerMin(varPerMin);
+				event.setVarPerMinP2P(varPerMin);
 				eventService.update(event);
 			}
 		});
+	}
+	
+	public void calculateVarPerMinT2P(Event firstEvent, Event lastEvent) {
+		
+		BigDecimal difMin;
+		BigDecimal difGluc;
+		BigDecimal varPerMin;
+		
+		LocalDateTime fromDateTime = firstEvent.getDate();
+		LocalDateTime toDateTime = lastEvent.getDate();
+		LocalDateTime tempDateTime = LocalDateTime.from(fromDateTime);
+		Long minutes = tempDateTime.until(toDateTime, ChronoUnit.MINUTES);
+		System.out.println("Possui " + minutes + " minutos de distância!");//DELETE ME!
+		
+		difMin = BigDecimal.valueOf(minutes);
+		System.out.println("e em BigDecimal --> " + difMin);//DELETE ME!
+		//difMin = BigDecimal.valueOf((newList.get(ind).getDate()./60000) - (newList.get(ind - 1).getDate().getTime()/60000));//DELETE ME!
+		difGluc = lastEvent.getValue().subtract(firstEvent.getValue());
+		varPerMin = difGluc.divide(difMin,4,BigDecimal.ROUND_HALF_UP);
+		lastEvent.setVarPerMinT2P(varPerMin);
+		eventService.update(lastEvent);
+		
+	}
+	
+	public GlucosePrediction glucoseLevelPredictTwoPoints(LocalDateTime sourceDateFrom, LocalDateTime sourceDateTo) {
+		
+		return null;
 	}
 
 }
