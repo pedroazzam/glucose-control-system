@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.managedata.glucontrolapi.service.UserDetailsServiceImpl;
 
@@ -27,7 +28,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
             .authorizeRequests()
 	        .antMatchers(resources).permitAll()  
 	        .antMatchers("/","/index").permitAll()
-	        .antMatchers("/admin*").access("hasRole('ADMIN')")
+	        .antMatchers("/admin*", "/api/admin/**").access("hasRole('ADMIN')")
 	        .antMatchers("/user*").access("hasRole('USER') or hasRole('ADMIN')")
                 .anyRequest().authenticated()
                 .and()

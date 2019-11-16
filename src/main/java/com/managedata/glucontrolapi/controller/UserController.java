@@ -26,7 +26,7 @@ public class UserController {
 	@Autowired
 	UserService userService;
 	
-	@GetMapping("/user/all")
+	@GetMapping("/admin/user/all")
 	@ApiOperation(value="Return all users")
 	public List<User> userList(){
 		return userService.findAll();

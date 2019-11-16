@@ -40,7 +40,7 @@ public class EventController {
 	@Autowired
 	UserService userService;
 
-	@GetMapping("/event/all")
+	@GetMapping("/admin/event/all")
 	@ApiOperation(value = "Return all events")
 	public List<Event> findAll() {
 		List<Event> newListEvent = eventService.findAll();
@@ -52,7 +52,7 @@ public class EventController {
 		return newListEvent;
 	}
 
-	@PostMapping("/event/user")
+	@PostMapping("/admin/event/user")
 	@ApiOperation(value = "Return all events for an user (through a POST method)")
 	public List<Event> findByUser(@RequestBody User user) {
 		User newUser = userService.findById(user.getId());
@@ -63,7 +63,7 @@ public class EventController {
 		return newListEvent;
 	}
 
-	@GetMapping("event/user/{id}")
+	@GetMapping("/event/user/{id}")
 	@ApiOperation(value = "Return all events for an user (through a GET method)")
 	public List<Event> findByUserId(@PathVariable(value = "id") long id) {
 		User newUser = userService.findById(id);
@@ -74,7 +74,7 @@ public class EventController {
 		return newListEvent;
 	}
 
-	@GetMapping("event/userdates")
+	@GetMapping("/admin/event/userdates")
 	@ApiOperation(value = "Return all events for an user between two dates (through a GET method) plus variations calculation")
 	public List<Event> findByUserIdDateFromTo(@RequestParam long id, @RequestParam String dateTimeFrom,
 			@RequestParam String dateTimeTo) {
@@ -117,7 +117,7 @@ public class EventController {
 		return newEventList;
 	}
 
-	@PostMapping("event/add")
+	@PostMapping("/admin/event/add")
 	@ApiOperation(value = "Register new event")
 	public Event registerEvent(@RequestBody Event event) {
 		System.out.println("DATE IS: " + event.getDate());
