@@ -1,10 +1,11 @@
-package com.managedata.glucontrolapi.models;
+package com.managedata.glucontrolapi.entity;
 
 import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,7 +24,7 @@ public class User implements Serializable {
 	@Id
 	@GeneratedValue( strategy=GenerationType.IDENTITY)
 	@Column(name="id")
-	private long id;
+	private Long id;
 	
 	@Column(name="first_name")
 	private String firstName;
@@ -43,26 +44,21 @@ public class User implements Serializable {
 	@Column(name="dr_email")
 	private String drEmail;
 	
-	@ManyToMany
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-	@Column(name="roles")
-	private Set<Role> roles;
+	@Column(name="enabled")
+	private boolean enabled;
+	
+	@ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "authorities_users", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "authority_id"))
+	private Set<Authority> authority;
+
 
 	
 	
-	public Set<Role> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
-	}
-
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -112,6 +108,52 @@ public class User implements Serializable {
 
 	public void setDrEmail(String drEmail) {
 		this.drEmail = drEmail;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public Set<Authority> getAuthority() {
+		return authority;
+	}
+
+	public void setAuthority(Set<Authority> authority) {
+		this.authority = authority;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + email + ", password=" + password + "]";
 	}
 	
 	

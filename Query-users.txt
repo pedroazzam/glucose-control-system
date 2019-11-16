@@ -1,0 +1,17 @@
+INSERT INTO tb_user (id,enabled,password,email) 
+VALUES(1,true,'$2a$04$4fnFl2WHMgEeRziGNUxHOuzTChL1RIJr6tw7deTajbyfkIMp/s08y','admin');
+
+INSERT INTO tb_user (id,enabled,password,email) 
+VALUES(2,true,'$2a$04$4fnFl2WHMgEeRziGNUxHOuzTChL1RIJr6tw7deTajbyfkIMp/s08y','user');
+
+select * from tb_user;
+
+
+INSERT INTO authority (id,authority) VALUES (1,'ROLE_ADMIN');
+INSERT INTO authority (id,authority) VALUES (2,'ROLE_USER');
+select * from authority;
+
+INSERT INTO authorities_users (user_id, authority_id) VALUES (1,1);
+INSERT INTO authorities_users (user_id, authority_id) VALUES (1,2);
+INSERT INTO authorities_users (user_id, authority_id) VALUES (2,2);
+select * from authorities_users;

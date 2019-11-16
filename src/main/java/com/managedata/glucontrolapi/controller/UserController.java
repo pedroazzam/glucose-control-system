@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.managedata.glucontrolapi.models.User;
+import com.managedata.glucontrolapi.entity.User;
 import com.managedata.glucontrolapi.service.UserService;
 
 import io.swagger.annotations.Api;

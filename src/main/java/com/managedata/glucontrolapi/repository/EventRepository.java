@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.managedata.glucontrolapi.models.Event;
-import com.managedata.glucontrolapi.models.User;
+import com.managedata.glucontrolapi.entity.Event;
+import com.managedata.glucontrolapi.entity.User;
 
 public interface EventRepository extends JpaRepository<Event, Long> {
 	

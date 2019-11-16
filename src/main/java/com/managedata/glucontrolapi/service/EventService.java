@@ -2,8 +2,8 @@ package com.managedata.glucontrolapi.service;
 
 import java.util.List;
 
-import com.managedata.glucontrolapi.models.Event;
-import com.managedata.glucontrolapi.models.User;
+import com.managedata.glucontrolapi.entity.Event;
+import com.managedata.glucontrolapi.entity.User;
 
 public interface EventService {
 	

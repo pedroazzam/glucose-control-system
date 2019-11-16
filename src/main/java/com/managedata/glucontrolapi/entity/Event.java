@@ -1,4 +1,4 @@
-package com.managedata.glucontrolapi.models;
+package com.managedata.glucontrolapi.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;

@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.managedata.glucontrolapi.models.Event;
-import com.managedata.glucontrolapi.models.User;
+import com.managedata.glucontrolapi.entity.Event;
+import com.managedata.glucontrolapi.entity.User;
 import com.managedata.glucontrolapi.repository.EventRepository;
 
 @Service

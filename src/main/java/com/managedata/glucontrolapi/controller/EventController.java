@@ -19,9 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.managedata.glucontrolapi.models.Event;
-import com.managedata.glucontrolapi.models.GlucosePrediction;
-import com.managedata.glucontrolapi.models.User;
+import com.managedata.glucontrolapi.entity.Event;
+import com.managedata.glucontrolapi.entity.GlucosePrediction;
+import com.managedata.glucontrolapi.entity.User;
 import com.managedata.glucontrolapi.service.EventService;
 import com.managedata.glucontrolapi.service.UserService;
 
