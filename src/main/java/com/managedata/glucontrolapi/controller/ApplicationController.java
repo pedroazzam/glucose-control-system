@@ -1,16 +1,29 @@
 package com.managedata.glucontrolapi.controller;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@RequestMapping("/api/auth")
+@Controller
 public class ApplicationController {
 	
-	@GetMapping("/getMsg")
-	public String greeting() {
-		return "spring security example";
+	@GetMapping({"/", "/login"})
+	public String index() {
+		return "index";
+	}
+	
+	@GetMapping("/menu")
+	public String menu() {
+		return "menu";
+	}
+	
+	@GetMapping("/admin")
+	public String admin() {
+		return "admin";
+	}
+	
+	@GetMapping("/user")
+	public String user() {
+		return "user";
 	}
 
 }
