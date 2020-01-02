@@ -1,8 +1,8 @@
-INSERT INTO tb_user (id,enabled,password,email) 
-VALUES(1,true,'$2a$04$4fnFl2WHMgEeRziGNUxHOuzTChL1RIJr6tw7deTajbyfkIMp/s08y','admin');
+INSERT INTO tb_user (id,dr_email,dr_full_name,email,enabled,first_name,last_name,password) 
+VALUES(1,'deuzita@espacocuidar.com.br','Maria Deuzita Neves','pedro@pedroazzam.me',true,'Pedro','Azzam','$2a$04$4fnFl2WHMgEeRziGNUxHOuzTChL1RIJr6tw7deTajbyfkIMp/s08y');
 
-INSERT INTO tb_user (id,enabled,password,email) 
-VALUES(2,true,'$2a$04$4fnFl2WHMgEeRziGNUxHOuzTChL1RIJr6tw7deTajbyfkIMp/s08y','user');
+INSERT INTO tb_user (id,dr_email,dr_full_name,email,enabled,first_name,last_name,password) 
+VALUES(2,'laura@hospitalveterinaridelmar.es','Laura','latifah@pedroazzam.me',true,'Latifah','Azzam','$2a$04$4fnFl2WHMgEeRziGNUxHOuzTChL1RIJr6tw7deTajbyfkIMp/s08y');
 
 select * from tb_user;
 

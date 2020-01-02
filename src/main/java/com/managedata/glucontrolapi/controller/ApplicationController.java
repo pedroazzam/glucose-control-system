@@ -1,13 +1,22 @@
 package com.managedata.glucontrolapi.controller;
 
+import java.security.Principal;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.managedata.glucontrolapi.entity.Authority;
 import com.managedata.glucontrolapi.entity.User;
+import com.managedata.glucontrolapi.service.AuthorityService;
 import com.managedata.glucontrolapi.service.UserService;
 
 
@@ -17,6 +26,8 @@ public class ApplicationController {
 	
 	@Autowired
 	UserService userService;
+	
+	AuthorityService authorityService;
 	
 	@GetMapping({"/", "/login"})
 	public String index() {
@@ -30,6 +41,8 @@ public class ApplicationController {
 	
 	@GetMapping("/menu")
 	public String menu() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		System.out.println("Logged as " + authentication.getName().toString());
 		return "menu";
 	}
 	
@@ -43,20 +56,37 @@ public class ApplicationController {
 		return "user";
 	}
 	
+	@GetMapping("/user/addevent")
+	public String addEvent() {
+		return "addevent";
+	}
+	
 	@PostMapping("/user/save") 
 	public String newUser(@ModelAttribute("user") User theUser) {
-		System.out.println("PASSOU AKI01");
+		System.out.println("PASSOU AKI01");//DELETE ME!
 		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(4);
-		System.out.println("PASSOU AKI02");
+		System.out.println("PASSOU AKI02");//DELETE ME!
 		theUser.setPassword(bCryptPasswordEncoder.encode(theUser.getPassword()));
-		theUser.setEnabled(true);
-		System.out.println("PASSOU AKI03");
+		theUser.setEnabled(true);//For a while all users are enabled=true! But the target is to be enabled=false by default and turn to true only after e-mail link check!
+		System.out.println("PASSOU AKI03");//DELETE ME!
 		System.out.println(theUser.getId());
 		userService.save(theUser);
 		
 		 
 	 	return "redirect:/"; 
 	 }
+	
+	//Populate authority table with available roles!
+	public void populateAuthority() {
+		Authority authority = new Authority();
+		authority.setId(1L);
+		authority.setAuthority("ROLE_ADMIN");
+		authorityService.saveAuthority(authority);
+		
+		authority.setId(2L);
+		authority.setAuthority("ROLE_USER");
+		authorityService.saveAuthority(authority);
+	}
 	 
 	 
 
