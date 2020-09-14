@@ -63,13 +63,16 @@ public class ApplicationController {
 	
 	@PostMapping("/user/save") 
 	public String newUser(@ModelAttribute("user") User theUser) {
-		System.out.println("PASSOU AKI01");//DELETE ME!
 		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(4);
-		System.out.println("PASSOU AKI02");//DELETE ME!
 		theUser.setPassword(bCryptPasswordEncoder.encode(theUser.getPassword()));
 		theUser.setEnabled(true);//For a while all users are enabled=true! But the target is to be enabled=false by default and turn to true only after e-mail link check!
-		System.out.println("PASSOU AKI03");//DELETE ME!
-		System.out.println(theUser.getId());
+		System.out.println("New User:");//DELETE ME!
+		System.out.println("User [" +
+				"firstName=" + theUser.getFirstName() +
+				", lastName=" + theUser.getLastName() +
+				", email=" + theUser.getEmail() +
+				", drFullName=" + theUser.getDrFullName() +
+				", drEmail=" + theUser.getDrEmail() + "]");//DELETE ME!
 		userService.save(theUser);
 		
 		 
