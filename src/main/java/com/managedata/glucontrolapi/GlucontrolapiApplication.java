@@ -3,7 +3,7 @@ package com.managedata.glucontrolapi;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.managedata.glucontrolapi.controller.ApplicationController;
+//import com.managedata.glucontrolapi.controller.ApplicationController;
 
 @SpringBootApplication
 public class GlucontrolapiApplication {

@@ -58,8 +58,12 @@ public class UserController {
 			System.out.println("é null!");
 			throw new IllegalArgumentException("Access denied! Please try again or SignUp.");
 		}
-			
-		
+	}
+
+	@GetMapping("/test")
+	@ApiOperation(value="Test")
+	public void tete(){
+
 	}
 	
 	

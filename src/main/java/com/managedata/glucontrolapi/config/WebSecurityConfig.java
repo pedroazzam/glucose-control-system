@@ -3,6 +3,7 @@ package com.managedata.glucontrolapi.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -24,6 +25,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        /*
+        http.cors();
+        http.csrf().disable().
+                authorizeRequests().antMatchers("/**").
+                fullyAuthenticated().and().httpBasic();*/ //glucontrol-fe
+
+
+        http.csrf().
+                disable()
+                .authorizeRequests()
+                .antMatchers(HttpMethod.OPTIONS, "/**")
+                .permitAll()
+                .anyRequest()
+                .authenticated()
+                .and()
+                .httpBasic();
+
+        /*
         http
             .authorizeRequests()
 	        .antMatchers(resources).permitAll()  
@@ -43,6 +62,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
             .logout()
                 .permitAll()
                 .logoutSuccessUrl("/login?logout");
+
+         */
     }
     
     BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -68,6 +89,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());     
     }
     
-    
+    //added
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth)throws Exception{
+//        auth.inMemoryAuthentication()
+//                .withUser("javatechie")
+//                    .password("{noop}jt143").roles("USER");
+//    }
 
 }

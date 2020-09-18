@@ -1,3 +1,4 @@
+/*
 package com.managedata.glucontrolapi.controller;
 
 import java.security.Principal;
@@ -94,3 +95,6 @@ public class ApplicationController {
 	 
 
 }
+
+
+ */
