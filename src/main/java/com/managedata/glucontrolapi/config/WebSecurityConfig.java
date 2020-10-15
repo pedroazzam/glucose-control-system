@@ -25,13 +25,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        /*
-        http.cors();
-        http.csrf().disable().
-                authorizeRequests().antMatchers("/**").
-                fullyAuthenticated().and().httpBasic();*/ //glucontrol-fe
+        http.csrf().
+                disable()
+                .authorizeRequests()
+                .antMatchers(HttpMethod.POST,"/api/signup","/api/v1/basicauth")
+                .permitAll()
+                .anyRequest()
+                .authenticated()
+                .and()
+                .httpBasic();
 
 
+/*
         http.csrf().
                 disable()
                 .authorizeRequests()
@@ -41,7 +46,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .authenticated()
                 .and()
                 .httpBasic();
-
+*/
+/*        http
+                .authorizeRequests()
+                .antMatchers(resources).permitAll()
+                .antMatchers("/api/signup").permitAll()
+                .antMatchers("/admin*", "/api/admin/**").access("hasRole('ADMIN')")
+                .antMatchers("/user*").access("hasRole('USER') or hasRole('ADMIN')")
+                .anyRequest().authenticated()
+                .and()
+                .httpBasic();
+*/
         /*
         http
             .authorizeRequests()

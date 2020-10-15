@@ -3,6 +3,7 @@ package com.managedata.glucontrolapi.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -30,6 +31,7 @@ public class UserController {
 	@GetMapping("admin/user/all")
 	@ApiOperation(value="Return all users")
 	public List<User> userList(){
+		System.out.println("PASSOU AQUI TESTE 15-10-20");
 		return userService.findAll();
 	}
 	
@@ -43,6 +45,19 @@ public class UserController {
 	@PostMapping("/signup")
 	@ApiOperation(value="Register new user")
 	public User saveUser (@RequestBody User user) {
+
+		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(4);
+		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+		user.setEnabled(true);//For a while all users are enabled=true! But the target is to be enabled=false by default and turn to true only after e-mail link check!
+
+		System.out.println("New User:");//DELETE ME!
+		System.out.println("User [" +
+				"firstName=" + user.getFirstName() +
+				", lastName=" + user.getLastName() +
+				", email=" + user.getEmail() +
+				", drFullName=" + user.getDrFullName() +
+				", drEmail=" + user.getDrEmail() + "]");//DELETE ME!
+
 		User newUser = userService.save(user);
 		return newUser;
 	}
