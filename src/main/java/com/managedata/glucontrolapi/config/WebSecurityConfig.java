@@ -29,7 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         http.csrf().
                 disable()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST,"/api/signup","/api/v1/basicauth")
+                .antMatchers("/api/signup","/api/v1/basicauth")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
