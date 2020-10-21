@@ -23,7 +23,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	
     @Override
      public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		
+
+        System.out.println("Trying to login with --> username: " + username);
+
      //Buscar el usuario con el repositorio y si no existe lanzar una exepcion
      com.managedata.glucontrolapi.entity.User appUser = 
                  userRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("User doesn't exist"));
@@ -35,7 +37,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(authority.getAuthority());
             grantList.add(grantedAuthority);
     }
-		
+		System.out.println("Username exists! user: [" + appUser.getFirstName() + ", " + appUser.getLastName() + ", " + appUser.getEmail() +"]");
     //Crear El objeto UserDetails que va a ir en sesion y retornarlo.
     UserDetails user = (UserDetails) new User(appUser.getEmail(), appUser.getPassword(), grantList);
          return user;
