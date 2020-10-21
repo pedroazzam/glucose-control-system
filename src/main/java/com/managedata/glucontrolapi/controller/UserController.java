@@ -46,6 +46,10 @@ public class UserController {
 	@ApiOperation(value="Register new user")
 	public User saveUser (@RequestBody User user) {
 
+		System.out.println("Entered in PostMapping(/signup");
+		System.out.println(user.getPassword());
+
+
 		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(4);
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		user.setEnabled(true);//For a while all users are enabled=true! But the target is to be enabled=false by default and turn to true only after e-mail link check!
