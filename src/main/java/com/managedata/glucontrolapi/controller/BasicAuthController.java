@@ -1,9 +1,6 @@
 package com.managedata.glucontrolapi.controller;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.managedata.glucontrolapi.bean.AuthenticationBean;
 
@@ -13,9 +10,18 @@ import com.managedata.glucontrolapi.bean.AuthenticationBean;
 @RequestMapping("/api/v1")
 public class BasicAuthController {
 
-    @GetMapping(path = "/basicauth")
+    @PostMapping(path = "/basicauth")
     public AuthenticationBean basicauth() {
         System.out.println("Logged in!");
         return new AuthenticationBean("You are authenticated");
     }
+
+
+//    @GetMapping(path = "/basicauth")
+//    public AuthenticationBean basicauth() {
+//        System.out.println("Logged in!");
+//        return new AuthenticationBean("You are authenticated");
+//    }
+    
+
 }

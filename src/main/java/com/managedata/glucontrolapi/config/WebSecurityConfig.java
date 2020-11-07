@@ -22,14 +22,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     String[] resources = new String[]{
             "/include/**","/css/**","/icons/**","/img/**","/js/**","/layer/**"
     };
-    
+
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
         http.csrf().
                 disable()
                 .authorizeRequests()
-                .antMatchers("/api/signup","/api/v1/basicauth")
+                .antMatchers( "/api/signup","/api/v1/basicauth", "/api/user/email/*", "/api/user/update")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
@@ -61,7 +62,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         /*
         http
             .authorizeRequests()
-	        .antMatchers(resources).permitAll()  
+	        .antMatchers(resources).permitAll()
 	        .antMatchers("/","/index","/register","/user/save").permitAll()
 	        .antMatchers("/admin*", "/api/admin/**").access("hasRole('ADMIN')")
 	        .antMatchers("/user*").access("hasRole('USER') or hasRole('ADMIN')")
@@ -98,13 +99,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     UserDetailsServiceImpl userDetailsService;
   //Registra el service para usuarios y el encriptador de contrasena
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception { 
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 
         // Setting Service to find User in the database.
         // And Setting PassswordEncoder
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());     
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
-    
+
+
+//    @Autowired
+//    public void configureGlobal(AuthenticationManagerBuilder auth)
+//            throws Exception
+//    {
+//        auth.inMemoryAuthentication()
+//                .withUser("admin")
+//                .password("{noop}password")
+//                .roles("USER");
+//    }
+
     //added
 //    @Override
 //    protected void configure(AuthenticationManagerBuilder auth)throws Exception{
